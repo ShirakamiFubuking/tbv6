@@ -1,0 +1,43 @@
+formatters:
+  file output:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  root out:
+    format: '%(asctime)s:%(name)s:%(message)s'
+  std format:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: std format
+    level: WARNING
+    stream: ext://sys.stderr
+  default:
+    class: logging.StreamHandler
+    formatter: root out
+    level: DEBUG
+  file handler:
+    class: logging.FileHandler
+    encoding: utf-8
+    filename: log.log
+    formatter: std format
+    level: DEBUG
+    mode: a
+loggers:
+  file:
+    handlers:
+    - file handler
+    level: WARNING
+    propageate: false
+  console:
+    handlers:
+    - console
+    level: WARNING
+  generate log:
+    handlers:
+    - file handler
+    - console
+    level: DEBUG
+    propageate: false
+root:
+  level: DEBUG
+version: 1
